@@ -8,21 +8,22 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCx3qgjmKSMLsysfgNfdZGfpliNLC7DSsQ",
-  authDomain: "todo-raheem.firebaseapp.com",
-  databaseURL: "https://todo-raheem-default-rtdb.firebaseio.com",
-  projectId: "todo-raheem",
-  storageBucket: "todo-raheem.appspot.com",
-  messagingSenderId: "995949691300",
-  appId: "1:995949691300:web:6f6be48d8f1c2ce78a4131",
-  measurementId: "G-97YR48293B"
+  apiKey: "AIzaSyB3k1ZsOyYA25Nx9Wzud9GPfC2avoVc8bw",
+  authDomain: "devwasihackathon.firebaseapp.com",
+  databaseURL: "https://devwasihackathon-default-rtdb.firebaseio.com",
+  projectId: "devwasihackathon",
+  storageBucket: "devwasihackathon.appspot.com",
+  messagingSenderId: "894228325119",
+  appId: "1:894228325119:web:aab5fbe67f4133223922ca"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
+
 
 const auth = getAuth();
 

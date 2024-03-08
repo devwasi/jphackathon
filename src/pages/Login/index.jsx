@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,7 +10,12 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../../config/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 function Copyright(props) {
   return (
@@ -30,15 +34,60 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignInSide() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+export default function Login() {
+  // const loginHandler = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //   });
+  // };
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const navigate = useNavigate()
+
+
+  const loginHandler = async (e)=>{
+    e.preventDefault();
+    console.log("run")
+      try {
+        await  signInWithEmailAndPassword(auth, email,password).then(async userCredentials=>{
+              navigate("/home")
+              localStorage.setItem("uid",userCredentials.user.uid);
+              const docData = await getDoc(doc(db,"users", userCredentials.user.uid))
+              localStorage.setItem("userData",JSON.stringify(docData.data()))
+          }
+              ).catch(error=>{
+                console.log("sign in nerror===>",error)
+                  toast.error(error.code, {
+                      position: "top-center",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                      });
+              })
+      } catch (error) {
+        console.log(error)
+          toast.error(error.code, {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
+      }
+  }
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -74,7 +123,7 @@ export default function SignInSide() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -82,6 +131,7 @@ export default function SignInSide() {
                 id="email"
                 label="Email Address"
                 name="email"
+                onChange={e=>setEmail(e.target.value)}
                 autoComplete="email"
                 autoFocus
               />
@@ -91,31 +141,25 @@ export default function SignInSide() {
                 fullWidth
                 name="password"
                 label="Password"
+                onChange={e=>setPassword(e.target.value)}
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
+                onClick={loginHandler}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
+                
                 <Grid item>
-                  <Link to={"/signup"} variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link to={"/signup"} >
+                    Don't have an account? Sign Up
                   </Link>
                 </Grid>
               </Grid>
