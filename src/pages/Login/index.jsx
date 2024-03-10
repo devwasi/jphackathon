@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../config/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { Toast } from '../../utilis/Toast';
 
 function Copyright(props) {
   return (
@@ -62,29 +63,11 @@ export default function Login() {
           }
               ).catch(error=>{
                 console.log("sign in nerror===>",error)
-                  toast.error(error.code, {
-                      position: "top-center",
-                      autoClose: 5000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "light",
-                      });
+                  Toast("error",error.message)
               })
       } catch (error) {
         console.log(error)
-          toast.error(error.code, {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              });
+        Toast("error",error.message)
       }
   }
 
