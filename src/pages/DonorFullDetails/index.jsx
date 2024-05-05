@@ -52,39 +52,17 @@ getdataHandler()
 
   return (
     <>
-     {/* <div className="main">
-      <Select defaultValue="clear" onChange={filterHandler}>
-        <Option value="clear">add filter</Option>
-        <Option value="A+">A+</Option>
-        <Option value="B+">B+</Option>
-        <Option value="AB+">AB+</Option>
-        <Option value="O+">O+</Option>
-        <Option value="A-">A-</Option>
-        <Option value="B-">B-</Option>
-        <Option value="AB-">AB-</Option>
-        <Option value="O-">O-</Option>
-      </Select>
-    
-      { filter ? ( // if user add filter show this
-       productData
-         .filter((e, i) => e.bloodGroup.includes(filter))
-         .map((e, i) => {
-           return (
-              <OutlinedCard key={i} age={e.age} name={e.name} city={e.city} gender={e.gender} bloodGroup={e.bloodGroup} />
-           );
-         })
-     ) : ""
-    } 
-     
-    </div> */}
     <ResponsiveAppBar />
+    <Box sx={{bgcolor: "#d2df7f", height: "100dvh", borderRadius: 5, paddingTop: 1, mt:1,}}>
+
       <Box  sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-around', flexWrap: "wrap", rowGap:2, mt:2 }}>
       {
-       isLoading ? "loading" : donorData.filter(e=>e.uid == uid).map((e,i)=>{
-        return  <OutlinedCard key={i} age={e.age} name={e.name} city={e.city} gender={e.gender} bloodGroup={e.bloodGroup} address={e.address} donorDetails={true} contactNum={e.contactNum} email={e.email} />
+        isLoading ? "loading" : donorData.filter(e=>e.uid == uid).map((e,i)=>{
+          return  <OutlinedCard key={i} age={e.age} name={e.name} city={e.city} gender={e.gender} bloodGroup={e.bloodGroup} address={e.address} donorDetails={true} contactNum={e.contactNum} email={e.email} />
         })
       }
     </Box>
+      </Box>
     </>
   )
 }

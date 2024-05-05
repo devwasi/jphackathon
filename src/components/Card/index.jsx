@@ -22,8 +22,8 @@ export default function OutlinedCard({city,name, age, gender, bloodGroup, uid, a
   const navigate = useNavigate()
 
   return (
-    <Box sx={donorDetails ? { minWidth: 400, boxShadow: "0 0 5px black", borderRadius: 2,} 
-    : { minWidth: 275, maxWidth: 325, boxShadow: "0 0 5px black", borderRadius: 2, }}>
+    <Box sx={donorDetails ? { minWidth: 400, boxShadow: "0 0 20px #970a00", border: "2px solid #970a00", borderRadius: 2,} 
+    : { minWidth: 275, maxWidth: 325, boxShadow: "0 0 20px #970a00", border: "2px solid #970a00", borderRadius: 2, }}>
       {/* <Card variant="outlined">{card}</Card> */}
       <CardContent>
       <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>

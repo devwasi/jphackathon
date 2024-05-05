@@ -16,6 +16,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 import { Toast } from '../../utilis/Toast';
+import Logo from "../../utilis/images/bloodAppLogo.png"
 
 const pages = ['Donate'];
 
@@ -51,22 +52,22 @@ function ResponsiveAppBar() {
   }
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{bgcolor: "#d2df7f", borderRadius: 5}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Box sx={{ display: { xs: 'none', md: 'flex' }}}><Link to={"/home"}><img src={Logo} alt="logo" width={80} /></Link></Box>
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#970a00',
               textDecoration: 'none',
             }}
           >
@@ -103,12 +104,20 @@ function ResponsiveAppBar() {
               }}
             >
                 <MenuItem sx={{display: "flex", flexDirection: "column"}} onClick={handleCloseNavMenu}>
-                  <Button onClick={()=>navigate("/donor")} >Donate Blood</Button>
-                  <Button onClick={signOutHandler} >Sign Out</Button>
+                  <Button
+                  sx={{ my: 2, color: 'black', display: 'block', border: "2px solid #970a00", ":hover" : {bgcolor: "#970a0099"} }}
+                  onClick={()=>navigate("/donor")} >Donate Blood</Button>
+                  <Button
+                  sx={{ my: 2, color: 'black', display: 'block', border: "2px solid #970a00", ":hover" : {bgcolor: "#970a0099"} }}
+                  onClick={signOutHandler} >Sign Out</Button>
                 </MenuItem>
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} >
+            <Link to={"/home"}>
+              <img src={Logo} alt="logo" width={80} />
+              </Link>
+            </Box>
           <Typography
             variant="h5"
             noWrap
@@ -121,23 +130,23 @@ function ResponsiveAppBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#970a00',
               textDecoration: 'none',
             }}
           >
             Blooder
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: "end" } }}>
+          <Box sx={{ flexGrow: 1,gap:1, display: { xs: 'none', md: 'flex', justifyContent: "end" } }}>
 
               <Button
                 onClick={()=>navigate("/donor")}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'black', display: 'block', border: "2px solid #970a00", ":hover" : {bgcolor: "#970a0099"} }}
                 >
                 Donate Blood
               </Button>
               <Button
                 onClick={signOutHandler}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'black', display: 'block', border: "2px solid #970a00", ":hover" : {bgcolor: "#970a0099"} }}
                 >
                 Sign Out
               </Button>
